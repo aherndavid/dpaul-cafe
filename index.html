@@ -93,10 +93,32 @@
     z-index: 1;
   }
 
+  /* ── PAGE FRAME ──────────────────────────────────
+     Fixed border inset from viewport by nav dimensions.
+     Background images show through in the margins.
+  ─────────────────────────────────────────────────── */
+  #page-frame {
+    position: fixed;
+    top:    1.4rem;
+    bottom: 1.4rem;
+    left:   3rem;
+    right:  3rem;
+    border: 1px solid rgba(138,106,26,0.5);
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  /* All content scrolls inside the frame margins */
+  #page-inner {
+    position: relative;
+    z-index: 1;
+    margin: 1.4rem 3rem;
+  }
 
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
+    position: sticky;
+    top: 0;
+    left: 0; right: 0;
     z-index: 100;
     display: flex;
     justify-content: space-between;
@@ -738,12 +760,17 @@
 
 <!-- BACKGROUND SLIDESHOW -->
 <div id="bg-slide" aria-hidden="true">
-  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/assets/cafe0.png')"></div>
-  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/assets/cafe1.png')"></div>
-  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/assets/cafe2.png')"></div>
-  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/assets/cafe3.png')"></div>
-  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/assets/cafe4.png')"></div>
+  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/AS/cafe1.png')"></div>
+  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/AS/cafe2.png')"></div>
+  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/AS/cafe3.png')"></div>
+  <div class="bg-layer" style="background-image:url('https://raw.githubusercontent.com/aherndavid/dpaul-cafe/main/AS/cafe4.png')"></div>
 </div>
+
+<!-- FIXED BORDER FRAME -->
+<div id="page-frame" aria-hidden="true"></div>
+
+<!-- ALL PAGE CONTENT inside the frame margin -->
+<div id="page-inner">
 
 <!-- NAV -->
 <nav>
@@ -1064,5 +1091,7 @@
   tick();
   setInterval(tick, 1000);
 </script>
+
+</div><!-- /page-inner -->
 </body>
 </html>
