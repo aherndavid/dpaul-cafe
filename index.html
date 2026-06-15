@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dPaul Café — Knightsbridge, London</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Big+Shoulders+Text:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:   #131413;
+    --black2:  #1a1c1a;
+    --black3:  #0f100f;
+    --yellow:  #F2E528;
+    --yellow2: #d4c800;
+    --offwhite:#F0EFE8;
+    --grey:    #888c85;
+    --stripe-w: 1px;
+    --stripe-gap: 22px;
+    --pinstripe: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent calc(var(--stripe-gap) - var(--stripe-w)),
+      rgba(255,255,255,0.038) calc(var(--stripe-gap) - var(--stripe-w)),
+      rgba(255,255,255,0.038) var(--stripe-gap)
+    );
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--offwhite);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--pinstripe);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ─────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    border-bottom: 1px solid rgba(242,229,40,0.15);
+    background: rgba(19,20,19,0.92);
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-logo {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 1.55rem;
+    letter-spacing: 0.18em;
+    color: var(--yellow);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--offwhite); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    color: var(--offwhite);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+
+  .nav-cta {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    color: var(--black);
+    background: var(--yellow);
+    padding: 0.55rem 1.6rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--yellow2); }
+
+  /* ── HERO ─────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    position: relative;
+    overflow: hidden;
+    padding-top: 72px;
+  }
+
+  .hero-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 3rem 0 3.5rem;
+    border-right: 1px solid rgba(242,229,40,0.18);
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  .side-label {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.38em;
+    color: var(--grey);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .side-label.accent { color: var(--yellow); }
+
+  .scroll-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--yellow), transparent);
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+  @keyframes pulse-line {
+    0%,100% { opacity: 0.4; transform: scaleY(1); }
+    50%      { opacity: 1;   transform: scaleY(1.15); }
+  }
+
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 3.5rem 3.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 600;
+    font-size: 0.76rem;
+    letter-spacing: 0.42em;
+    color: var(--yellow);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--yellow);
+  }
+
+  .hero-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(7rem, 14vw, 13rem);
+    line-height: 0.86;
+    letter-spacing: -0.01em;
+    color: var(--offwhite);
+  }
+  .hero-title .dp { color: var(--yellow); }
+  .hero-title .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--yellow);
+  }
+
+  .hero-subtitle-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(242,229,40,0.2);
+  }
+  .hero-desc {
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--grey);
+    max-width: 360px;
+    line-height: 1.8;
+  }
+  .hero-open-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+  }
+  .badge-dot {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    color: var(--yellow);
+  }
+  .badge-dot::before {
+    content: '';
+    display: block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--yellow);
+    animation: blink 1.8s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.15; }
+  }
+  .badge-hours { font-size: 0.73rem; color: var(--grey); }
+
+
+
+  /* ── SELECTIVE CAPS (utility labels only) ── */
+  .side-label, .hero-eyebrow, .address-label, .card-cat,
+  .cup-slot-label, .gallery-label, .img-coming,
+  .nav-links a, .nav-cta, .btn, .badge-dot, .footer-socials a {
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHELL ─────────────────── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 4.5rem;
+    line-height: 1;
+    color: rgba(242,229,40,0.1);
+    user-select: none;
+  }
+  .section-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+  }
+  .section-title span { color: var(--yellow); }
+  .y-rule { width: 3rem; height: 2px; background: var(--yellow); margin: 1.5rem 0; }
+
+  /* ── PHILOSOPHY / ORIGINS ──────────── */
+  #philosophy {
+    padding: 7rem 3.5rem 7rem 6.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    border-bottom: 1px solid rgba(242,229,40,0.1);
+    position: relative;
+    z-index: 1;
+  }
+  .phil-left {}
+  .phil-body {
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--grey);
+    line-height: 1.95;
+    max-width: 460px;
+    margin-bottom: 2rem;
+  }
+  .phil-body strong { color: var(--offwhite); font-weight: 500; }
+
+  .origins-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(242,229,40,0.1);
+  }
+  .origin-card {
+    background: var(--black2);
+    padding: 1.8rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .origin-flag {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+    line-height: 1;
+  }
+  .origin-country {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .origin-note {
+    font-size: 0.78rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+  .origin-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--yellow);
+    transition: width 0.4s ease;
+  }
+  .origin-card:hover::after { width: 100%; }
+  .origin-card.featured { background: #1e2118; }
+  .origin-card.featured .origin-country { color: var(--yellow); }
+
+  /* ── THE CUP ──────────────────────── */
+  #thecup {
+    padding: 7rem 3.5rem 7rem 6.5rem;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid rgba(242,229,40,0.1);
+  }
+
+  .cup-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(242,229,40,0.08);
+    margin-top: 3rem;
+  }
+
+  .cup-slot {
+    background: var(--black2);
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  /* Hexagonal cup illustration (SVG inline) */
+  .cup-hex-wrap {
+    width: 110px;
+    margin-bottom: 1.5rem;
+    opacity: 0.85;
+    transition: opacity 0.3s, transform 0.4s;
+  }
+  .cup-slot:hover .cup-hex-wrap {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+
+  .cup-slot-label {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    color: var(--grey);
+    text-align: center;
+  }
+  .cup-slot-name {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+    text-align: center;
+  }
+
+  /* Image placeholder – swapped out when your photos arrive */
+  .cup-img-placeholder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 0;
+  }
+  .cup-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    position: absolute;
+    inset: 0;
+  }
+  .cup-slot .cup-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Coming-soon tag */
+  .img-coming {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(242,229,40,0.35);
+    margin-top: 0.4rem;
+    border: 1px solid rgba(242,229,40,0.15);
+    padding: 0.2rem 0.6rem;
+  }
+
+  /* ── INTERIOR GALLERY ─────────────── */
+  #interior {
+    padding: 7rem 3.5rem 7rem 6.5rem;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid rgba(242,229,40,0.1);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 320px 260px;
+    gap: 2px;
+    background: rgba(242,229,40,0.08);
+    margin-top: 3rem;
+  }
+
+  .gallery-slot {
+    background: var(--black2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .gallery-slot.large { grid-row: span 2; }
+
+  .gallery-slot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    transition: opacity 0.4s;
+  }
+  .gallery-slot:hover img { opacity: 0.65; }
+
+  .gallery-label {
+    position: relative;
+    z-index: 2;
+    padding: 1rem 1.2rem;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--yellow);
+    background: linear-gradient(to top, rgba(19,20,19,0.9) 0%, transparent 100%);
+    width: 100%;
+  }
+
+  /* Hexagonal wireframe drawn via clip-path for the placeholder */
+  .hex-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hex-placeholder {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: rgba(242,229,40,0.28);
+    text-align: center;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    border: 1px solid rgba(242,229,40,0.1);
+    padding: 1.2rem 2rem;
+  }
+
+  /* ── MENU SECTION ─────────────────── */
+  #menu {
+    padding: 7rem 3.5rem 7rem 6.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(242,229,40,0.1);
+  }
+  .menu-card {
+    background: var(--black2);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .menu-card:hover { background: #1f221f; }
+  .menu-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--yellow);
+    transition: width 0.4s ease;
+  }
+  .menu-card:hover::after { width: 100%; }
+  .card-cat {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.42em;
+    color: var(--yellow);
+    margin-bottom: 0.9rem;
+  }
+  .card-name {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 1.9rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .card-desc {
+    font-weight: 300;
+    font-size: 0.86rem;
+    color: var(--grey);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+  .card-price {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--yellow);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── MANIFESTO ────────────────────── */
+  #manifesto {
+    padding: 6rem 3.5rem 6rem 6.5rem;
+    border-top: 1px solid rgba(242,229,40,0.1);
+    border-bottom: 1px solid rgba(242,229,40,0.1);
+    position: relative;
+    z-index: 1;
+  }
+  .manifesto-text {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+    line-height: 1.05;
+    max-width: 850px;
+  }
+  .manifesto-text em {
+    font-style: italic;
+    color: var(--yellow);
+  }
+
+  /* ── VISIT + MAP ──────────────────── */
+  #visit {
+    position: relative;
+    z-index: 1;
+  }
+
+  .visit-top {
+    padding: 7rem 3.5rem 5rem 6.5rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    border-bottom: 1px solid rgba(242,229,40,0.1);
+  }
+
+  .visit-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    margin-bottom: 2.5rem;
+  }
+  .visit-title span { color: var(--yellow); }
+
+  .address-label {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.42em;
+    color: var(--yellow);
+    margin-bottom: 0.55rem;
+  }
+  .address-text {
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--offwhite);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+
+  .hours-table { width: 100%; border-collapse: collapse; }
+  .hours-table tr { border-bottom: 1px solid rgba(242,229,40,0.07); }
+  .hours-table td { padding: 0.7rem 0; font-size: 0.9rem; color: var(--grey); }
+  .hours-table td:last-child { text-align: right; color: var(--offwhite); font-weight: 500; }
+  .hours-table tr.today td { color: var(--yellow) !important; }
+
+  /* Google Maps embed */
+  .map-wrap {
+    width: 100%;
+    height: 480px;
+    background: var(--black2);
+    position: relative;
+    overflow: hidden;
+    border-top: 2px solid rgba(242,229,40,0.2);
+  }
+  .map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(85%) invert(92%) contrast(85%) hue-rotate(180deg);
+    opacity: 0.82;
+  }
+  .map-overlay-label {
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+    background: rgba(19,20,19,0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(242,229,40,0.2);
+    padding: 1rem 1.5rem;
+    z-index: 5;
+  }
+  .map-overlay-label .mol-name {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--yellow);
+  }
+  .map-overlay-label .mol-addr {
+    font-size: 0.78rem;
+    color: var(--grey);
+    margin-top: 0.2rem;
+  }
+
+  /* ── FOOTER ───────────────────────── */
+  footer {
+    background: var(--black3);
+    padding: 3rem 3.5rem 3rem 6.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid var(--yellow);
+    position: relative;
+    z-index: 1;
+  }
+  .footer-logo {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 1.9rem;
+    letter-spacing: 0.2em;
+    color: var(--yellow);
+  }
+  .footer-logo span { color: var(--offwhite); }
+  .footer-copy { font-size: 0.76rem; color: var(--grey); letter-spacing: 0.04em; }
+  .footer-socials { display: flex; gap: 1.5rem; }
+  .footer-socials a {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 0.73rem;
+    letter-spacing: 0.25em;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-socials a:hover { color: var(--yellow); }
+
+  /* ── BTN ──────────────────────────── */
+  .btn {
+    display: inline-block;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 0.86rem;
+    letter-spacing: 0.26em;
+    color: var(--black);
+    background: var(--yellow);
+    padding: 0.85rem 2.5rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .btn:hover { background: var(--yellow2); transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">d<span>Paul</span></a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Our Story</a></li>
+    <li><a href="#thecup">The Cup</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#interior">Space</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="#visit" class="nav-cta">Find Us</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-sidebar">
+    <span class="side-label accent">Knightsbridge, London</span>
+    <span class="side-label">Natural &amp; Ethical Coffee</span>
+    <div class="scroll-line"></div>
+  </div>
+  <div class="hero-main">
+    <div class="hero-eyebrow">Specialty Coffee House · Est. 2024</div>
+    <h1 class="hero-title">
+      <span class="dp">d</span>Paul<br>
+      <span class="outline">Café</span>
+    </h1>
+    <div class="hero-subtitle-row">
+      <p class="hero-desc">Ultra-smooth, naturally processed coffee sourced from ethical farms across the world — served with care in darkened hexagonal glass, in the heart of Knightsbridge.</p>
+      <div class="hero-open-badge">
+        <span class="badge-dot">Open Now</span>
+        <span class="badge-hours">Mon – Fri &nbsp;·&nbsp; 7AM – 8PM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PHILOSOPHY & ORIGINS -->
+<section id="philosophy">
+  <div class="phil-left">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Our<br><span>Philosophy</span></h2>
+    </div>
+    <p class="phil-body">
+      At dPaul, we believe the finest cup of coffee begins long before it reaches your hands. We travel the world to build direct relationships with farmers who share our values — <strong>paying fair prices, protecting ecosystems, and championing communities</strong> that have cultivated coffee for generations.
+    </p>
+    <p class="phil-body">
+      Every bean we use is naturally processed: no chemicals, no shortcuts. The result is a coffee of extraordinary smoothness — fruit-forward, complex, and utterly clean on the palate. When you sit with us in Knightsbridge, you taste <strong>the care of every person</strong> in that chain.
+    </p>
+    <a href="#menu" class="btn" style="margin-top:1.5rem;">Explore the Menu</a>
+  </div>
+
+  <div>
+    <div style="margin-bottom:1.5rem;">
+      <div class="address-label">Beans Sourced From</div>
+    </div>
+    <div class="origins-grid">
+      <div class="origin-card featured">
+        <div class="origin-flag">🇪🇹</div>
+        <div class="origin-country">Ethiopia</div>
+        <div class="origin-note">Yirgacheffe & Sidama regions. Natural sundried. Blueberry, jasmine, dark honey.</div>
+      </div>
+      <div class="origin-card">
+        <div class="origin-flag">🇨🇴</div>
+        <div class="origin-country">Colombia</div>
+        <div class="origin-note">Huila highlands. Small family farms. Caramel, red apple, clean finish.</div>
+      </div>
+      <div class="origin-card">
+        <div class="origin-flag">🇬🇹</div>
+        <div class="origin-country">Guatemala</div>
+        <div class="origin-note">Antigua volcanic soil. Washed & natural. Rich cocoa, brown sugar, citrus peel.</div>
+      </div>
+      <div class="origin-card">
+        <div class="origin-flag">🇰🇪</div>
+        <div class="origin-country">Kenya</div>
+        <div class="origin-note">SL-28 varietal. Blackcurrant, tomato vine, sparkling acidity. Exceptional.</div>
+      </div>
+      <div class="origin-card">
+        <div class="origin-flag">🇾🇪</div>
+        <div class="origin-country">Yemen</div>
+        <div class="origin-note">Ancient Mokha heritage beans. Dried fruit, oud spice, extraordinary depth.</div>
+      </div>
+      <div class="origin-card">
+        <div class="origin-flag">🇮🇩</div>
+        <div class="origin-country">Indonesia</div>
+        <div class="origin-note">Sulawesi Toraja. Earthy, cedar, dark fruits. Natural wet-hulled process.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE CUP -->
+<section id="thecup">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">The<br><span>Cup</span></h2>
+  </div>
+  <p style="font-weight:300; font-size:0.95rem; color:var(--grey); max-width:580px; line-height:1.9; margin-bottom:0.5rem;">
+    Our signature darkened hexagonal glass cups are a dPaul original — tall, narrow, architectural. The smoked glass tempers the light, keeps your coffee at the perfect temperature, and turns every drink into something you want to hold. Photography coming soon.
+  </p>
+
+  <div class="cup-showcase">
+    <!-- Cup slot 1 -->
+    <div class="cup-slot">
+      <div class="cup-img-placeholder">
+        <!-- YOUR CUP PHOTO GOES HERE: <img src="cup-espresso.jpg" alt="dPaul Espresso Cup"> -->
+      </div>
+      <div class="cup-content">
+        <svg class="cup-hex-wrap" viewBox="0 0 110 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hexagonal cup silhouette -->
+          <polygon points="55,8 100,32 100,80 55,104 10,80 10,32" stroke="#F2E528" stroke-width="1" fill="rgba(19,20,19,0.6)" stroke-linejoin="round"/>
+          <rect x="38" y="104" width="34" height="42" rx="2" stroke="#F2E528" stroke-width="1" fill="rgba(19,20,19,0.6)"/>
+          <line x1="55" y1="104" x2="55" y2="146" stroke="rgba(242,229,40,0.2)" stroke-width="1"/>
+          <ellipse cx="55" cy="30" rx="30" ry="8" stroke="rgba(242,229,40,0.25)" stroke-width="0.5" fill="none"/>
+          <line x1="25" y1="50" x2="85" y2="50" stroke="rgba(242,229,40,0.1)" stroke-width="0.5"/>
+          <line x1="25" y1="65" x2="85" y2="65" stroke="rgba(242,229,40,0.1)" stroke-width="0.5"/>
+        </svg>
+        <div class="cup-slot-label">Espresso Size</div>
+        <div class="cup-slot-name">The Short</div>
+        <div class="img-coming">Photo Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- Cup slot 2 -->
+    <div class="cup-slot">
+      <div class="cup-img-placeholder">
+        <!-- YOUR CUP PHOTO GOES HERE: <img src="cup-latte.jpg" alt="dPaul Latte Cup"> -->
+      </div>
+      <div class="cup-content">
+        <svg class="cup-hex-wrap" viewBox="0 0 110 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="55,6 102,30 102,88 55,112 8,88 8,30" stroke="#F2E528" stroke-width="1" fill="rgba(19,20,19,0.6)" stroke-linejoin="round"/>
+          <rect x="36" y="112" width="38" height="52" rx="2" stroke="#F2E528" stroke-width="1" fill="rgba(19,20,19,0.6)"/>
+          <line x1="55" y1="112" x2="55" y2="164" stroke="rgba(242,229,40,0.2)" stroke-width="1"/>
+          <ellipse cx="55" cy="28" rx="32" ry="8" stroke="rgba(242,229,40,0.25)" stroke-width="0.5" fill="none"/>
+          <line x1="23" y1="52" x2="87" y2="52" stroke="rgba(242,229,40,0.1)" stroke-width="0.5"/>
+          <line x1="23" y1="70" x2="87" y2="70" stroke="rgba(242,229,40,0.1)" stroke-width="0.5"/>
+          <line x1="23" y1="88" x2="87" y2="88" stroke="rgba(242,229,40,0.1)" stroke-width="0.5"/>
+        </svg>
+        <div class="cup-slot-label">Latte / Flat White</div>
+        <div class="cup-slot-name">The Tall</div>
+        <div class="img-coming">Photo Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- Cup slot 3 -->
+    <div class="cup-slot">
+      <div class="cup-img-placeholder">
+        <!-- YOUR CUP PHOTO GOES HERE: <img src="cup-cold.jpg" alt="dPaul Cold Brew Cup"> -->
+      </div>
+      <div class="cup-content">
+        <svg class="cup-hex-wrap" viewBox="0 0 110 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="55,5 105,30 105,100 55,125 5,100 5,30" stroke="#F2E528" stroke-width="1" fill="rgba(19,20,19,0.5)" stroke-linejoin="round"/>
+          <rect x="33" y="125" width="44" height="58" rx="2" stroke="#F2E528" stroke-width="1" fill="rgba(19,20,19,0.6)"/>
+          <!-- Condensation dots for cold brew -->
+          <circle cx="30" cy="60" r="1.5" fill="rgba(242,229,40,0.3)"/>
+          <circle cx="80" cy="80" r="1.2" fill="rgba(242,229,40,0.2)"/>
+          <circle cx="35" cy="95" r="1" fill="rgba(242,229,40,0.25)"/>
+          <circle cx="75" cy="45" r="1.3" fill="rgba(242,229,40,0.2)"/>
+          <line x1="20" y1="58" x2="90" y2="58" stroke="rgba(242,229,40,0.12)" stroke-width="0.5"/>
+          <line x1="20" y1="80" x2="90" y2="80" stroke="rgba(242,229,40,0.12)" stroke-width="0.5"/>
+          <line x1="20" y1="100" x2="90" y2="100" stroke="rgba(242,229,40,0.12)" stroke-width="0.5"/>
+        </svg>
+        <div class="cup-slot-label">Cold Brew / Iced</div>
+        <div class="cup-slot-name">The Grand</div>
+        <div class="img-coming">Photo Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERIOR GALLERY -->
+<section id="interior">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">The<br><span>Space</span></h2>
+  </div>
+  <p style="font-weight:300; font-size:0.95rem; color:var(--grey); max-width:560px; line-height:1.9; margin-bottom:0.5rem;">
+    A curated environment in the heart of Knightsbridge — dark materials, warm light, hexagonal motifs throughout. A place to think, to meet, to simply be. Interior photography coming soon.
+  </p>
+
+  <div class="gallery-grid">
+    <div class="gallery-slot large">
+      <!-- YOUR INTERIOR PHOTO: <img src="interior-main.jpg" alt="dPaul interior"> -->
+      <div class="hex-bg">
+        <div class="hex-placeholder">Main Interior<br>Photography Coming Soon<br>— Replace with your image —</div>
+      </div>
+      <div class="gallery-label">The Interior</div>
+    </div>
+    <div class="gallery-slot">
+      <!-- YOUR PHOTO: <img src="bar.jpg" alt="dPaul coffee bar"> -->
+      <div class="hex-bg">
+        <div class="hex-placeholder" style="font-size:0.6rem;">The Bar<br>Coming Soon</div>
+      </div>
+      <div class="gallery-label">The Bar</div>
+    </div>
+    <div class="gallery-slot">
+      <!-- YOUR PHOTO: <img src="seating.jpg" alt="dPaul seating"> -->
+      <div class="hex-bg">
+        <div class="hex-placeholder" style="font-size:0.6rem;">Seating<br>Coming Soon</div>
+      </div>
+      <div class="gallery-label">Seating</div>
+    </div>
+    <div class="gallery-slot">
+      <!-- YOUR PHOTO: <img src="cup-detail.jpg" alt="dPaul cup close up"> -->
+      <div class="hex-bg">
+        <div class="hex-placeholder" style="font-size:0.6rem;">Cup Detail<br>Coming Soon</div>
+      </div>
+      <div class="gallery-label">The Cup — Detail</div>
+    </div>
+    <div class="gallery-slot">
+      <!-- YOUR PHOTO: <img src="beans.jpg" alt="dPaul beans"> -->
+      <div class="hex-bg">
+        <div class="hex-placeholder" style="font-size:0.6rem;">The Beans<br>Coming Soon</div>
+      </div>
+      <div class="gallery-label">The Beans</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">The<br><span>Menu</span></h2>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="card-cat">Espresso</div>
+      <div class="card-name">dPaul Black</div>
+      <p class="card-desc">Double ristretto, naturally processed Ethiopian Yirgacheffe. Blueberry, dark honey, clean and smooth. Served in our signature hexagonal short glass.</p>
+      <div class="card-price">£4.00</div>
+    </div>
+    <div class="menu-card">
+      <div class="card-cat">Milk</div>
+      <div class="card-name">Flat White</div>
+      <p class="card-desc">Double shot with silky micro-foam steamed oat milk. Colombian Huila single-origin. Caramel, gentle sweetness. Our most-loved daily.</p>
+      <div class="card-price">£4.80</div>
+    </div>
+    <div class="menu-card">
+      <div class="card-cat">Filter</div>
+      <div class="card-name">Pour Over</div>
+      <p class="card-desc">Brewed to order, rotating origin. Ask our team what's on the bar today. Precision temperature, 4-minute draw-down, extraordinary clarity.</p>
+      <div class="card-price">£5.50</div>
+    </div>
+    <div class="menu-card">
+      <div class="card-cat">Cold</div>
+      <div class="card-name">Cold Brew</div>
+      <p class="card-desc">24-hour Kenyan cold steep. Velvet-smooth, no bitterness, naturally sweet. Served in the tall hexagonal glass — zero ice, pure coffee.</p>
+      <div class="card-price">£5.80</div>
+    </div>
+    <div class="menu-card">
+      <div class="card-cat">Signature</div>
+      <div class="card-name">dPaul Cortado</div>
+      <p class="card-desc">Our house drink. Equal espresso and warm oat milk, served in the hexagonal glass at the perfect ratio. Smooth, precise, unmistakeable.</p>
+      <div class="card-price">£4.50</div>
+    </div>
+    <div class="menu-card">
+      <div class="card-cat">Food</div>
+      <div class="card-name">Seasonal Plate</div>
+      <p class="card-desc">A small, considered food offering that changes with the week. Ask the team. Always local, always thoughtful, always paired to your coffee.</p>
+      <div class="card-price">From £6.00</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <p class="manifesto-text">
+    Coffee is not a <em>commodity</em>.<br>
+    It is a relationship — with a farmer,<br>
+    a country, a moment in time.<br>
+    Drink it like you mean it.
+  </p>
+</section>
+
+<!-- VISIT + MAP -->
+<section id="visit">
+  <div class="visit-top">
+    <div>
+      <h2 class="visit-title">Come<br>To<br><span>Knightsbridge.</span></h2>
+      <div class="address-label">Address</div>
+      <div class="address-text">
+        dPaul Café<br>
+        12 Beauchamp Place<br>
+        Knightsbridge<br>
+        London, SW3 1NQ
+      </div>
+      <div class="address-label">Contact</div>
+      <div class="address-text">
+        hello@dpaulcafe.co.uk<br>
+        020 7946 0812
+      </div>
+      <a href="mailto:hello@dpaulcafe.co.uk" class="btn">Get In Touch</a>
+    </div>
+    <div>
+      <div class="address-label" style="margin-bottom:1.5rem;">Opening Hours</div>
+      <table class="hours-table">
+        <tr class="today"><td>Monday</td><td>7:00 — 20:00</td></tr>
+        <tr><td>Tuesday</td><td>7:00 — 20:00</td></tr>
+        <tr><td>Wednesday</td><td>7:00 — 20:00</td></tr>
+        <tr><td>Thursday</td><td>7:00 — 21:00</td></tr>
+        <tr><td>Friday</td><td>7:00 — 21:00</td></tr>
+        <tr><td>Saturday</td><td>8:00 — 19:00</td></tr>
+        <tr><td>Sunday</td><td>9:00 — 17:00</td></tr>
+      </table>
+      <div style="margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(242,229,40,0.1);">
+        <div class="address-label">Nearest Tube</div>
+        <div class="address-text" style="font-size:0.9rem;">Knightsbridge (Piccadilly Line)<br>2 minutes walk</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE MAP — Beauchamp Place, Knightsbridge -->
+  <div class="map-wrap">
+    <div class="map-overlay-label">
+      <div class="mol-name">dPaul Café</div>
+      <div class="mol-addr">12 Beauchamp Place, Knightsbridge, London SW3 1NQ</div>
+    </div>
+    <iframe
+      title="dPaul Café location"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.7!2d-0.1626!3d51.4993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876053b8f3000a7%3A0x1234567890abcdef!2sBeauchamp%20Place%2C%20London%20SW3!5e0!3m2!1sen!2suk!4v1718000000000!5m2!1sen!2suk"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">d<span>Paul</span></div>
+  <div class="footer-copy">© 2024 dPaul Café, Knightsbridge. All rights reserved.</div>
+  <div class="footer-socials">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>
